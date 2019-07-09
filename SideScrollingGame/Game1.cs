@@ -123,7 +123,7 @@ namespace SideScrollingGame
             startButton.Load(this.Content, 43, 43, "start", 0);
 
             // TODO: use this.Content to load your game content here
-            player.Load(this.Content, screenWidth / 2, screenHight - player.player.Height);
+            player.Load(this.Content, screenWidth / 2 - player.player.Width, screenHight / 2 - player.player.Height);
 
             // Load backhground
             backdrop = Content.Load<Texture2D>("images/level");
