@@ -32,8 +32,11 @@ namespace SideScrollingGame
         Button exitButton = new Button();
         Button startButton = new Button();
 
+        // Draw Level
+        Texture2D level;
+
         // Draw Background
-        Texture2D backdrop;
+        Texture2D background;
 
         // Create our player class
         Player player = new Player();
@@ -59,6 +62,7 @@ namespace SideScrollingGame
 
         // Add our timer stuff
         float elapsedTime;
+        double counter;
 
         // Create our game states
         public GameState setState()
@@ -125,8 +129,12 @@ namespace SideScrollingGame
             // TODO: use this.Content to load your game content here
             player.Load(this.Content, screenWidth / 2 - player.player.Width, screenHight / 2 - player.player.Height);
 
-            // Load backhground
-            backdrop = Content.Load<Texture2D>("images/level");
+            // Load level
+            level = Content.Load<Texture2D>("images/level");
+
+            // Load Background
+            background = Content.Load<Texture2D>("images/background");
+
 
             // Load our font
             arialFont = Content.Load<SpriteFont>("Arial");
@@ -170,6 +178,20 @@ namespace SideScrollingGame
                     break;
 
                 case GameState.PLAYING:
+
+                    // Increase our ticker after a second
+                    counter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (counter >= 1000)
+                    {
+                        score++;
+                        counter -= 1000;
+                    }
+
+                    // This will run every 50 score. (E.G 50, 100, 150)
+                    if(score % 50 == 0)
+                    {
+                        maxEnemy *= 2;
+                    }
 
                     // Increase our timer
                     elapsedTime += deltaTime;
@@ -236,14 +258,23 @@ namespace SideScrollingGame
             switch (state)
             {
                 case GameState.MENU:
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(background, new Rectangle(0, 0, screenWidth, screenHight), Color.White);
+                    spriteBatch.End();
                     exitButton.Draw(spriteBatch);
                     startButton.Draw(spriteBatch);
                     break;
                 case GameState.PLAYING:
                     // Draw objects not in classes
                     spriteBatch.Begin();
-                    spriteBatch.Draw(backdrop, new Rectangle(0, 0, screenWidth, screenHight), Color.White);
-                    spriteBatch.DrawString(arialFont, "Lives : " + player.Lives.ToString(), new Vector2(20, 20), Color.LightGreen, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+                    spriteBatch.Draw(level, new Rectangle(0, 0, screenWidth, screenHight), Color.White);
+                    spriteBatch.DrawString(arialFont, "Lives : " + player.Lives.ToString(), new Vector2(20, 20), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+
+                    // Get our score as a string, meausre it, then draw
+                    string scoreString = "Score : " + score;
+                    Vector2 scoreSize = arialFont.MeasureString(scoreString);
+                    spriteBatch.DrawString(arialFont, scoreString, new Vector2(screenWidth - scoreSize.X * 3 - 20, 0 + scoreSize.Y), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+
                     spriteBatch.End();
 
                     // Call our classes draw

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/player.png</SourceFile>
-  <SourceTime>2019-07-09T15:18:06+10:00</SourceTime>
-  <DestFile>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/bin/Windows/Content/images/player.xnb</DestFile>
-  <DestTime>2019-07-10T08:45:06+10:00</DestTime>
+  <SourceFile>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/background.png</SourceFile>
+  <SourceTime>2019-07-10T09:27:28+10:00</SourceTime>
+  <DestFile>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/bin/Windows/Content/images/background.xnb</DestFile>
+  <DestTime>2019-07-10T09:33:06+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-09T03:35:54+11:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
