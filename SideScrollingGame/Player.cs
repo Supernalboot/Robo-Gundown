@@ -89,7 +89,7 @@ namespace SideScrollingGame
                 player.X = 0;
             }
 
-            if (player.Y + player.Height > game.screenHight)
+            if (player.Y + player.Height > game.screenHight + (player.Height * 2))
             {
                 // game.state = GameState.LOST;
             }
@@ -122,7 +122,7 @@ namespace SideScrollingGame
             playerSprite = content.Load<Texture2D>("images/player");
 
             // Load our player Rectangle
-            player = new Rectangle(X, Y, playerSprite.Width - 200, playerSprite.Height - 200);
+            player = new Rectangle(X, Y, playerSprite.Width - 150, playerSprite.Height - 70);
         }
 
         // Draw our class
