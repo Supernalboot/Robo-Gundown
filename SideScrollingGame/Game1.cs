@@ -123,8 +123,8 @@ namespace SideScrollingGame
 
             // TODO: use this.Content to load your game content here
             // Load our buttons
-            exitButton.Load(this.Content, screenWidth / 2, screenHight / 2 - exitButton.button.Height, "exit", 1);
-            startButton.Load(this.Content, 43, 43, "start", 0);
+            exitButton.Load(this.Content, screenWidth / 3, screenHight / 2 - exitButton.button.Height, "exit", 1);
+            startButton.Load(this.Content, screenWidth / 3, screenHight / 3, "start", 0);
 
             // TODO: use this.Content to load your game content here
             player.Load(this.Content, screenWidth / 2 - player.player.Width, screenHight / 2 - player.player.Height);
