@@ -91,7 +91,7 @@ namespace SideScrollingGame
 
             if (player.Y + player.Height > game.screenHight)
             {
-                game.state = GameState.LOST;
+                // game.state = GameState.LOST;
             }
 
             if (player.Y < 0)

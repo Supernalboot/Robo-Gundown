@@ -4,23 +4,13 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/Arial.spritefont</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/enemy.png</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/enemyBullet.png</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/exit.png</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/level.png</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/player.png</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/playerBullet.png</File>
-    <File>C:/Users/s182212/source/repos/SideScrollingGame/SideScrollingGame/Content/images/start.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/Arial.spritefont</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/enemy.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/enemyBullet.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/exit.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/level.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/player.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/playerBullet.png</File>
+    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/start.png</File>
   </SourceFiles>
-  <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-  </DestFiles>
 </SourceFileCollection>
