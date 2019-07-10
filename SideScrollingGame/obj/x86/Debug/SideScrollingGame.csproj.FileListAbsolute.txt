@@ -76,3 +76,4 @@ D:\Github\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.csproj.
 D:\Github\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.csproj.CopyComplete
 D:\Github\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.exe
 D:\Github\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.pdb
+D:\Github\Robo-Gundown\SideScrollingGame\bin\Windows\x86\Debug\Content\images\gameOver.xnb

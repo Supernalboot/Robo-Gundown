@@ -35,6 +35,9 @@ namespace SideScrollingGame
         // Draw Background
         Texture2D backdrop;
 
+        // Draw Game Over Screen
+        public Texture2D gameOver;
+
         // Create our player class
         Player player = new Player();
 
@@ -70,6 +73,7 @@ namespace SideScrollingGame
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            gameOver = null;
         }
 
         /// <summary>
@@ -136,6 +140,9 @@ namespace SideScrollingGame
             {
                 enemy.Load(this.Content, this);
             }
+
+            // Load in Game Over Screen
+            gameOver = Content.Load<Texture2D>("images/gameOver");
         }
 
         /// <summary>
@@ -218,7 +225,29 @@ namespace SideScrollingGame
                         }
                     }
 
+                    // If lives hit 0 then change to Game Over screen
+                    if(player.Lives <= 0)
+                    {
+                        state = GameState.LOST;
+                    }
+
                     break;
+
+                case GameState.LOST:
+                    {
+                        // Get Keyboard State
+                        KeyboardState keyState = Keyboard.GetState();
+
+                        // Returns to Menu
+                        if(keyState.IsKeyDown(Keys.Escape))
+                        {
+                            player.Lives = 5;
+                            score = 0;
+                            state = GameState.MENU;
+                        }
+
+                        break;
+                    }
             }
 
             base.Update(gameTime);
@@ -239,6 +268,7 @@ namespace SideScrollingGame
                     exitButton.Draw(spriteBatch);
                     startButton.Draw(spriteBatch);
                     break;
+
                 case GameState.PLAYING:
                     // Draw objects not in classes
                     spriteBatch.Begin();
@@ -257,6 +287,12 @@ namespace SideScrollingGame
 
                     break;
                 default:
+                    break;
+
+                case GameState.LOST:
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(gameOver, new Rectangle(screenWidth / 3 - gameOver.Width, screenHight / 3 - gameOver.Height, screenWidth / 2, screenHight / 2), Color.White);
+                    spriteBatch.End();
                     break;
             }
 
