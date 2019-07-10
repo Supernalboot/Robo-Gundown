@@ -24,9 +24,6 @@ namespace SideScrollingGame
         // set our speed and timers
         int speed = 10;
 
-        //Create our Gun Class
-        Player player;
-
         // Create our Texture
         Texture2D shellSprite;
 
