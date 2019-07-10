@@ -14,9 +14,8 @@ namespace SideScrollingGame
     public class Shell
     {
 
-        public Shell(string whoShot)
+        public Shell()
         {
-            type = whoShot;
         }
 
         // Create our Shell Rectangle
@@ -28,9 +27,6 @@ namespace SideScrollingGame
         //Create our Gun Class
         Player player;
 
-        //Who fired billet
-        string type;
-
         // Create our Texture
         Texture2D shellSprite;
 
@@ -41,21 +37,23 @@ namespace SideScrollingGame
         public Vector2 position;
 
         // Set our Start Positon
-        void SetStartPos<T>(T character)
+        void SetStartPos(Player player)
         {
-            //position.X = character.player.Width / 2;
-            //position.Y = -character.player.Height;
+            position.X = player.player.X + player.player.Width - shell.Width;
+            position.Y = player.player.Y - shell.Height;
         }
 
         // Load our Sprite and Shell
-        public void Load<T>(ContentManager content, T character)
+        public void Load(ContentManager content, Player player)
         {
-            if(type == "player") shellSprite = content.Load<Texture2D>("images/playerBullet");
-            if (type == "enemy") shellSprite = content.Load<Texture2D>("images/enemyBullet");
-            
-            SetStartPos(character);
+            // Load the Sprite
+            shellSprite = content.Load<Texture2D>("images/playerBullet");
 
-            shell = new Rectangle(100, 100, shellSprite.Width - 20, shellSprite.Height - 20);
+            // Set our Starting Position
+            SetStartPos(player);
+
+            // Create our new shell rectangle
+            shell = new Rectangle((int)position.X, (int)position.Y, shellSprite.Width, shellSprite.Height);
         }
 
         // Draw our Sprite and Shell
@@ -68,14 +66,32 @@ namespace SideScrollingGame
 
         public void Update()
         {
-            if (type == "player") shell.Y -= speed;
-            if (type == "enemy") shell.Y += speed;
+            shell.Y -= speed;
+        }
+
+        public bool OffScreen(Game1 game)
+        {
+            if (shell.Y + shell.Height > game.screenHight)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // Collision Detection
-        bool HasCollided(Rectangle a_intersect)
+        public bool HasCollided(Rectangle a_intersect)
         {
-            return true;
+            if (shell.Intersects(a_intersect)) // rectange.intersects
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

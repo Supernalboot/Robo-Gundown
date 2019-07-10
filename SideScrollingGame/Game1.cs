@@ -60,6 +60,9 @@ namespace SideScrollingGame
         // Create our Max enemy range
         int maxEnemy = 5;
 
+        // Create our spawn time
+        double maxSpawn;
+
         // Create our Enemy list
         public List<Enemy> enemyList;
 
@@ -182,21 +185,20 @@ namespace SideScrollingGame
 
                 case GameState.PLAYING:
 
-                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-
-                        // Increase our ticker after a second
-                        counter += gameTime.ElapsedGameTime.TotalMilliseconds;
-                    if (counter >= 1000)
+                    // Increase our ticker after a second
+                    counter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (counter >= maxSpawn)
                     {
                         score++;
+                        maxSpawn = counter + 1000;
 
                         // This will run every 50 score. (E.G 50, 100, 150)
-                        if (score % 10 == 0 && score != 0)
+                        if (score % 50 == 0 && score != 0)
                         {
                             maxEnemy *= 2;
                         }
 
-                        counter -= 1000;
+                        //counter = 0;
                     }
 
                     // Increase our timer
@@ -226,23 +228,54 @@ namespace SideScrollingGame
                     // Update each Enemy
                     for (int i = 0; i < enemyList.Count; i++)
                     {
-                        Console.WriteLine("[" + i + "] " + "X: " + enemyList[i].enemy.X + " Y: " + enemyList[i].enemy.X);
                         // Update our enemy
                         enemyList[i].Update(this);
 
                         // Check if our enemy goes off screen and delete
                         if (enemyList[i].OffScreen(this) == true)
                         {
-                            Console.WriteLine("enemy [" + i + "] OffScreen");
                             enemyList.Remove(enemyList[i]);
                             continue;
                         }
 
+                        // Check if enemy has collieded with player
                         if (enemyList[i].HasCollided(player.player, this) == true)
                         {
-                            Console.WriteLine("Hit Player");
                             player.Lives--;
                             enemyList.Remove(enemyList[i]);
+                        }
+                    }
+
+                    // Check our shell list count
+                    if (player.shellList.Count != 0)
+                    {
+                        // minus 1 if the count isnt zero
+                        int maxShell = player.shellList.Count - 1;
+
+                        // Loop Through all our shells
+                        for (int i = 0; i < maxShell; i++)
+                        {
+                            // Update our bullet
+                            player.shellList[i].Update();
+
+                            // Check if the bullet goes off screen
+                            if (player.shellList[i].OffScreen(this) == true)
+                            {
+                                player.shellList.Remove(player.shellList[i]);
+                            }
+
+                            // Check the same for enemies
+                            if (enemyList.Count != 0)
+                            {
+                                int maxEnemy = enemyList.Count - 1;
+
+                                //Check if shell has collieded with the enemy
+                                for (int index = 0; index < maxEnemy; index++)
+                                    if (player.shellList[i].HasCollided(enemyList[index].enemy))
+                                    {
+                                        enemyList.Remove(enemyList[index]);
+                                    }
+                            }
                         }
                     }
 
@@ -297,6 +330,11 @@ namespace SideScrollingGame
                     spriteBatch.Draw(level, new Rectangle(0, 0, screenWidth, screenHight), Color.White);
                     spriteBatch.DrawString(arialFont, "Lives : " + player.Lives.ToString(), new Vector2(20, 20), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
 
+                    // Get our enemie as a string, meausre it, then draw
+                    string enemyString = "Enimies : " + maxEnemy.ToString();
+                    Vector2 enemySize = arialFont.MeasureString(enemyString);
+                    spriteBatch.DrawString(arialFont, enemyString, new Vector2(screenWidth / 2 - 70, 0), Color.Black, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+
                     // Get our score as a string, meausre it, then draw
                     string scoreString = "Score : " + score;
                     Vector2 scoreSize = arialFont.MeasureString(scoreString);
@@ -307,10 +345,16 @@ namespace SideScrollingGame
                     // Call our classes draw
                     player.Draw(spriteBatch);
 
+                    // Draw Our enemys
                     for (int i = 0; i < enemyList.Count; i++)
                     {
-                        // Draw Our enemy
                         enemyList[i].Draw(spriteBatch);
+                    }
+
+                    // Draw Our Bullets
+                    for (int i = 0; i < player.shellList.Count; i++)
+                    {
+                        player.shellList[i].Draw(spriteBatch);
                     }
 
                     break;
