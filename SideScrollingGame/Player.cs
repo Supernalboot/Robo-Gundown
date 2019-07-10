@@ -74,7 +74,7 @@ namespace SideScrollingGame
             if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
                 // Check if the spacebar os down
-                if (shellList.Count < 5 && spaceDown == false)
+                if (shellList.Count < 2 && spaceDown == false)
                 {
                     Shoot(game);
                 }
@@ -117,6 +117,12 @@ namespace SideScrollingGame
 
         public void Update(float deltaTime, Game1 game)
         {
+            // Check if player goes off screen
+            if(OffScreen(game) == true)
+            {
+                game.state = GameState.LOST;
+            }
+
             // Update our player
             UpdateInput(deltaTime, game);
 
@@ -148,6 +154,18 @@ namespace SideScrollingGame
             a_spriteBatch.Begin();
             a_spriteBatch.Draw(playerSprite, player, Color.White);
             a_spriteBatch.End();
+        }
+
+        bool OffScreen(Game1 game)
+        {
+            if (player.Y > game.screenHight * 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

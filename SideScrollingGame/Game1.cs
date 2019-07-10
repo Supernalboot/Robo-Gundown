@@ -12,7 +12,7 @@ namespace SideScrollingGame
     /// </summary>
 
     // Create our global variable for our game states
-    public enum GameState { MENU, PLAYING, LOST };
+    public enum GameState { MENU, PLAYING, LOST, LOAD };
 
     public class Game1 : Game
     {
@@ -79,7 +79,7 @@ namespace SideScrollingGame
         // Create our game states
         public GameState setState()
         {
-            return state = GameState.PLAYING;
+            return state = GameState.LOAD;
         }
 
         public Game1()
@@ -187,6 +187,22 @@ namespace SideScrollingGame
                 case GameState.MENU:
                     exitButton.Update(gameTime, this);
                     startButton.Update(gameTime, this);
+
+                    player.Load(this.Content, screenWidth / 2 - player.player.Width, screenHight / 2 - player.player.Height);
+
+                    break;
+
+                case GameState.LOAD:
+                    // Load or classes again
+
+                    // Load in our enemy
+                    foreach (Enemy enemy in enemyList)
+                    {
+                        enemy.Load(this.Content, this);
+                    }
+
+                    state = GameState.PLAYING;
+
                     break;
 
                 case GameState.PLAYING:
