@@ -38,6 +38,9 @@ namespace SideScrollingGame
         // Draw Background
         Texture2D background;
 
+        // Draw Game Over Screen
+        public Texture2D gameOver;
+
         // Create our player class
         Player player = new Player();
 
@@ -77,6 +80,7 @@ namespace SideScrollingGame
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            gameOver = null;
         }
 
         /// <summary>
@@ -147,6 +151,9 @@ namespace SideScrollingGame
             {
                 enemy.Load(this.Content, this);
             }
+
+            // Load in Game Over Screen
+            gameOver = Content.Load<Texture2D>("images/gameOver");
         }
 
         /// <summary>
@@ -165,10 +172,6 @@ namespace SideScrollingGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Set our escape key
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // Set our delta times
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -275,7 +278,28 @@ namespace SideScrollingGame
                             }
                         }
                     }
+
+                    // If lives hit 0 then change to Game Over screen
+                    if (player.Lives <= 0)
+                    {
+                        state = GameState.LOST;
+                    }
+
                     break;
+
+                case GameState.LOST:
+                    {
+
+                        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        {
+                            enemyList.Clear();
+                            player.Lives = 3;
+                            score = 0;
+                            state = GameState.MENU;
+                        }
+
+                        break;
+                    }
             }
 
             base.Update(gameTime);
@@ -287,7 +311,7 @@ namespace SideScrollingGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // Our game states to switch between
             switch (state)
@@ -299,6 +323,7 @@ namespace SideScrollingGame
                     exitButton.Draw(spriteBatch);
                     startButton.Draw(spriteBatch);
                     break;
+
                 case GameState.PLAYING:
                     // Draw objects not in classes
                     spriteBatch.Begin();
@@ -334,6 +359,13 @@ namespace SideScrollingGame
 
                     break;
                 default:
+                    break;
+
+                case GameState.LOST:
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(gameOver, new Rectangle((screenWidth / 2) - (gameOver.Width / 2), (screenHight / 2) - (gameOver.Height / 2), gameOver.Width, gameOver.Height), Color.White);
+                    spriteBatch.DrawString(arialFont, "Press Esc to return to menu", new Vector2(0,0), Color.Red, 0, new Vector2(0,0), 3, SpriteEffects.None, 0);
+                    spriteBatch.End();
                     break;
             }
 
