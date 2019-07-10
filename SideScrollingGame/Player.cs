@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SideScrollingGame
 {
-    class Player
+   public class Player
     {
         // Load our class
         public Player()
@@ -21,6 +21,11 @@ namespace SideScrollingGame
 
         // Set our Movement speed
         int moveSpeed = 10;
+
+        // Set our firing times
+        int counter;
+        int maxTime = 2000;
+        bool timeOut = false;
 
         // Set our lives
         public int Lives = 3;
@@ -32,14 +37,14 @@ namespace SideScrollingGame
         public Rectangle player;
 
         // Create our shell list
-        List<Shell> shellList;
+        public List<Shell> shellList = new List<Shell>();
 
         // Add the shell to the list for the game to manage
         void Shoot(Game1 game)
         {
-            //Shell shell = new Shell("player");
-            //shellList.Add(shell);
-            //shellList[shellList.Capacity - 1].Load<Player>(game.Content, this);
+            Shell shell = new Shell();
+            shellList.Add(shell);
+            shellList[shellList.Count - 1].Load(game.Content, this);
         }
 
         void UpdateInput(float deltaTime, Game1 game)
@@ -70,7 +75,12 @@ namespace SideScrollingGame
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
-                Shoot(game);
+                // Check if were on a time out
+                if (timeOut == false)
+                {
+                    timeOut = true;
+                    Shoot(game);
+                }
             }
 
             // Apply gravity
@@ -105,11 +115,20 @@ namespace SideScrollingGame
             // Update our player
             UpdateInput(deltaTime, game);
 
+            if(timeOut == true)
+            {
+                if(counter > maxTime)
+                {
+                    counter = 0;
+                    timeOut = false;
+                }
+            }
+
             // Update Bullets
-            //foreach(Shell bullet in shellList)
-            //{
-            //    bullet.Update();
-            //}
+            foreach (Shell bullet in shellList)
+            {
+                bullet.Update();
+            }
 
             // Check for collision
             Collision(game);

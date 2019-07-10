@@ -32,3 +32,4 @@ E:\AIE\Programming Foundations\Robo-Gundown\SideScrollingGame\obj\x86\Debug\Side
 E:\AIE\Programming Foundations\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.csproj.CopyComplete
 E:\AIE\Programming Foundations\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.exe
 E:\AIE\Programming Foundations\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.pdb
+E:\AIE\Programming Foundations\Robo-Gundown\SideScrollingGame\obj\x86\Debug\SideScrollingGame.csprojAssemblyReference.cache
