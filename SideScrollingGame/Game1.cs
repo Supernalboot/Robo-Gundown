@@ -169,10 +169,6 @@ namespace SideScrollingGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Set our escape key
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // Set our delta times
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -186,8 +182,10 @@ namespace SideScrollingGame
 
                 case GameState.PLAYING:
 
-                    // Increase our ticker after a second
-                    counter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+
+                        // Increase our ticker after a second
+                        counter += gameTime.ElapsedGameTime.TotalMilliseconds;
                     if (counter >= 1000)
                     {
                         score++;
@@ -249,7 +247,7 @@ namespace SideScrollingGame
                     }
 
                     // If lives hit 0 then change to Game Over screen
-                    if(player.Lives <= 0)
+                    if (player.Lives <= 0)
                     {
                         state = GameState.LOST;
                     }
@@ -258,13 +256,11 @@ namespace SideScrollingGame
 
                 case GameState.LOST:
                     {
-                        // Get Keyboard State
-                        KeyboardState keyState = Keyboard.GetState();
 
-                        // Returns to Menu
-                        if(keyState.IsKeyDown(Keys.Escape))
+                        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         {
-                            player.Lives = 5;
+                            enemyList.Clear();
+                            player.Lives = 3;
                             score = 0;
                             state = GameState.MENU;
                         }
@@ -282,7 +278,7 @@ namespace SideScrollingGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // Our game states to switch between
             switch (state)
@@ -323,7 +319,8 @@ namespace SideScrollingGame
 
                 case GameState.LOST:
                     spriteBatch.Begin();
-                    spriteBatch.Draw(gameOver, new Rectangle(screenWidth / 3 - gameOver.Width, screenHight / 3 - gameOver.Height, screenWidth / 2, screenHight / 2), Color.White);
+                    spriteBatch.Draw(gameOver, new Rectangle((screenWidth / 2) - (gameOver.Width / 2), (screenHight / 2) - (gameOver.Height / 2), gameOver.Width, gameOver.Height), Color.White);
+                    spriteBatch.DrawString(arialFont, "Press Esc to return to menu", new Vector2(0,0), Color.Red, 0, new Vector2(0,0), 3, SpriteEffects.None, 0);
                     spriteBatch.End();
                     break;
             }
