@@ -51,9 +51,32 @@ namespace SideScrollingGame
             enemy = new Rectangle((int)position.X, (int)position.Y, enemySprite.Width - 170, enemySprite.Height - 120);
 
             // Ajust Position so that they do not clip off screen
-            if(enemy.X + enemy.Width > game.screenWidth) enemy.X = game.screenWidth - enemy.Width;
-            if (enemy.X < 0) enemy.X = 0;
+            PosAjust(game);
 
+            // Check if collided with another enemy
+            for (int i = 0; i < game.enemyList.Count; i++)
+            {
+                // make sure that we dont check ourselves
+                if (this == game.enemyList[i]) continue;
+
+                if (HasCollided(game.enemyList[i].enemy, game) == true)
+                {
+                    // Reset Pos
+                    SetStartPos(game);
+                    enemy.X = (int)position.X;
+                    enemy.Y = (int)position.Y;
+                    PosAjust(game);
+
+                    i = 0;
+                }
+            }
+        }
+
+        void PosAjust(Game1 game)
+        {
+            // Ajust Position so that they do not clip off screen
+            if (enemy.X + enemy.Width > game.screenWidth) enemy.X = game.screenWidth - enemy.Width;
+            if (enemy.X < 0) enemy.X = 0;
         }
 
         // Draw our Sprite
