@@ -210,7 +210,7 @@ namespace SideScrollingGame
                     // Increase our ticker after a second
                     counter += gameTime.ElapsedGameTime.TotalMilliseconds;
 
-
+                    // Increase enemies by 2 every 50 score
                     if (counter >= maxSpawn)
                     {
                         score++;
@@ -259,7 +259,7 @@ namespace SideScrollingGame
                         if (enemyList[i].OffScreen(this) == true)
                         {
                             enemyList.Remove(enemyList[i]);
-                            continue;
+                            i = 0;
                         }
 
                         // Check if enemy has collieded with player
@@ -267,6 +267,8 @@ namespace SideScrollingGame
                         {
                             player.Lives--;
                             enemyList.Remove(enemyList[i]);
+
+                            i = 0;
                         }
                     }
 
@@ -285,27 +287,22 @@ namespace SideScrollingGame
                                 player.shellList.Remove(player.shellList[i]);
                             }
 
-                            // Check the same for enemies
-                            if (enemyList.Count != 0)
-                            {
-                                maxEnemyTime = enemyList.Count - 1;
-                            }
-                            else
-                            {
-                                maxEnemyTime = enemyList.Count;
-                            }
-
                             //Check if shell has collieded with the enemy
-                            if (player.shellList.Count != 0)
+                            for (int index = 0; index < enemyList.Count; index++)
                             {
-                                for (int index = 0; index < maxEnemyTime; index++)
+                                // Break out the loop if the bullet doesnt exist
+                                if (player.shellList.Count == 0) break;
+
+                                if (player.shellList[i].HasCollided(enemyList[index].enemy) == true)
                                 {
-                                    if (player.shellList[i].HasCollided(enemyList[index].enemy) == true)
-                                    {
-                                        enemyList.Remove(enemyList[index]);
-                                        player.shellList.Remove(player.shellList[i]);
-                                        break;
-                                    }
+                                    enemyList.Remove(enemyList[index]);
+                                    player.shellList.Remove(player.shellList[i]);
+
+                                    // Reset our loop process
+                                    index = 0;
+                                    i = 0;
+
+                                    break;
                                 }
                             }
                         }
