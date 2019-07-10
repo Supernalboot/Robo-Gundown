@@ -20,7 +20,7 @@ namespace SideScrollingGame
         SpriteBatch spriteBatch;
 
         // Create our delta time
-       public float deltaTime;
+        public float deltaTime;
 
         // Create our Gravity
         public Vector2 gravity = new Vector2(0, 10);
@@ -104,8 +104,8 @@ namespace SideScrollingGame
             // Add our enemy to the list
             for (int i = 0; i < maxEnemy; i++)
             {
-                    enemy = new Enemy();
-                    enemyList.Add(enemy);
+                enemy = new Enemy();
+                enemyList.Add(enemy);
             }
 
 
@@ -184,34 +184,35 @@ namespace SideScrollingGame
                     if (counter >= 1000)
                     {
                         score++;
-                        counter -= 1000;
-                    }
 
-                    // This will run every 50 score. (E.G 50, 100, 150)
-                    if(score % 50 == 0)
-                    {
-                        maxEnemy *= 2;
+                        // This will run every 50 score. (E.G 50, 100, 150)
+                        if (score % 10 == 0 && score != 0)
+                        {
+                            maxEnemy *= 2;
+                        }
+
+                        counter -= 1000;
                     }
 
                     // Increase our timer
                     elapsedTime += deltaTime;
-                    
+
                     // Fill in our enemies if they die
                     if (enemyList.Count < maxEnemy)
                     {
-                            Random rand = new Random(Guid.NewGuid().GetHashCode());
+                        Random rand = new Random(Guid.NewGuid().GetHashCode());
                         float maxTime = (float)rand.NextDouble();
 
-                            // Run only when the elapsed time has passed
-                            if (elapsedTime > maxTime)
-                            {
-                                enemy = new Enemy();
+                        // Run only when the elapsed time has passed
+                        if (elapsedTime > maxTime)
+                        {
+                            enemy = new Enemy();
 
-                                enemyList.Add(enemy);
-                                enemyList[enemyList.Count - 1].Load(this.Content, this);
+                            enemyList.Add(enemy);
+                            enemyList[enemyList.Count - 1].Load(this.Content, this);
 
-                                elapsedTime = 0f;
-                            }
+                            elapsedTime = 0f;
+                        }
                     }
 
                     // Update our classes
