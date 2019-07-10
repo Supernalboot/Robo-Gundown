@@ -30,16 +30,13 @@ namespace SideScrollingGame
         // Create our Texture
         Texture2D shellSprite;
 
-        // Set our fired bool
-        bool fired = false;
-
         // Create vector 2s for our direction and target position
         public Vector2 position;
 
         // Set our Start Positon
         void SetStartPos(Player player)
         {
-            position.X = player.player.X + player.player.Width - shell.Width;
+            position.X = player.player.X + player.player.Width;
             position.Y = player.player.Y - shell.Height;
         }
 
@@ -71,7 +68,7 @@ namespace SideScrollingGame
 
         public bool OffScreen(Game1 game)
         {
-            if (shell.Y + shell.Height > game.screenHight)
+            if (shell.Y + shell.Height < 0)
             {
                 return true;
             }

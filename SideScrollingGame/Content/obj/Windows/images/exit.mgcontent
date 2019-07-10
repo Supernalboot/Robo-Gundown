@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/exit.png</SourceFile>
-  <SourceTime>2019-07-08T16:15:50+10:00</SourceTime>
-  <DestFile>D:/Github/Robo-Gundown/SideScrollingGame/Content/bin/Windows/images/exit.xnb</DestFile>
-  <DestTime>2019-07-10T11:15:18+10:00</DestTime>
+  <SourceFile>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/exit.png</SourceFile>
+  <SourceTime>2019-07-09T15:55:32+10:00</SourceTime>
+  <DestFile>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/bin/Windows/images/exit.xnb</DestFile>
+  <DestTime>2019-07-10T13:55:30+10:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2017-03-02T02:05:36+11:00</ImporterTime>
+  <ImporterTime>2018-12-09T03:35:54+11:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2017-03-02T02:05:36+11:00</ProcessorTime>
+  <ProcessorTime>2018-12-09T03:35:54+11:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

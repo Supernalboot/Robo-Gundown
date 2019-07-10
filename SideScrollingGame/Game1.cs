@@ -61,14 +61,20 @@ namespace SideScrollingGame
         int maxEnemy = 5;
 
         // Create our spawn time
-        double maxSpawn;
+        double maxSpawn = 1000;
+
+        // Check max shell
+        int maxShell;
 
         // Create our Enemy list
         public List<Enemy> enemyList;
 
+        // Max enemy timer
+        int maxEnemyTime;
+
         // Add our timer stuff
         float elapsedTime;
-        double counter;
+        public double counter;
 
         // Create our game states
         public GameState setState()
@@ -187,6 +193,8 @@ namespace SideScrollingGame
 
                     // Increase our ticker after a second
                     counter += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+
                     if (counter >= maxSpawn)
                     {
                         score++;
@@ -246,14 +254,11 @@ namespace SideScrollingGame
                         }
                     }
 
-                    // Check our shell list count
+                    // make sure a shell exists
                     if (player.shellList.Count != 0)
                     {
-                        // minus 1 if the count isnt zero
-                        int maxShell = player.shellList.Count - 1;
-
                         // Loop Through all our shells
-                        for (int i = 0; i < maxShell; i++)
+                        for (int i = 0; i < player.shellList.Count; i++)
                         {
                             // Update our bullet
                             player.shellList[i].Update();
@@ -267,14 +272,25 @@ namespace SideScrollingGame
                             // Check the same for enemies
                             if (enemyList.Count != 0)
                             {
-                                int maxEnemy = enemyList.Count - 1;
+                                maxEnemyTime = enemyList.Count - 1;
+                            }
+                            else
+                            {
+                                maxEnemyTime = enemyList.Count;
+                            }
 
-                                //Check if shell has collieded with the enemy
-                                for (int index = 0; index < maxEnemy; index++)
-                                    if (player.shellList[i].HasCollided(enemyList[index].enemy))
+                            //Check if shell has collieded with the enemy
+                            if (player.shellList.Count != 0)
+                            {
+                                for (int index = 0; index < maxEnemyTime; index++)
+                                {
+                                    if (player.shellList[i].HasCollided(enemyList[index].enemy) == true)
                                     {
                                         enemyList.Remove(enemyList[index]);
+                                        player.shellList.Remove(player.shellList[i]);
+                                        break;
                                     }
+                                }
                             }
                         }
                     }
@@ -346,15 +362,15 @@ namespace SideScrollingGame
                     player.Draw(spriteBatch);
 
                     // Draw Our enemys
-                    for (int i = 0; i < enemyList.Count; i++)
+                    foreach (Enemy enemy in enemyList)
                     {
-                        enemyList[i].Draw(spriteBatch);
+                        enemy.Draw(spriteBatch);
                     }
 
-                    // Draw Our Bullets
-                    for (int i = 0; i < player.shellList.Count; i++)
+                    // Draw our shells
+                    foreach (Shell shell in player.shellList)
                     {
-                        player.shellList[i].Draw(spriteBatch);
+                        shell.Draw(spriteBatch);
                     }
 
                     break;
@@ -364,7 +380,7 @@ namespace SideScrollingGame
                 case GameState.LOST:
                     spriteBatch.Begin();
                     spriteBatch.Draw(gameOver, new Rectangle((screenWidth / 2) - (gameOver.Width / 2), (screenHight / 2) - (gameOver.Height / 2), gameOver.Width, gameOver.Height), Color.White);
-                    spriteBatch.DrawString(arialFont, "Press Esc to return to menu", new Vector2(0,0), Color.Red, 0, new Vector2(0,0), 3, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(arialFont, "Press Esc to return to menu", new Vector2(0, 0), Color.Red, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
                     spriteBatch.End();
                     break;
             }

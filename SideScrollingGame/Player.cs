@@ -22,10 +22,8 @@ namespace SideScrollingGame
         // Set our Movement speed
         int moveSpeed = 10;
 
-        // Set our firing times
-        int counter;
-        int maxTime = 2000;
-        bool timeOut = false;
+        //
+        bool spaceDown = false;
 
         // Set our lives
         public int Lives = 3;
@@ -43,8 +41,8 @@ namespace SideScrollingGame
         void Shoot(Game1 game)
         {
             Shell shell = new Shell();
+            shell.Load(game.Content, this);
             shellList.Add(shell);
-            shellList[shellList.Count - 1].Load(game.Content, this);
         }
 
         void UpdateInput(float deltaTime, Game1 game)
@@ -75,12 +73,19 @@ namespace SideScrollingGame
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
             {
-                // Check if were on a time out
-                if (timeOut == false)
+                // Check if the spacebar os down
+                if (shellList.Count < 5 && spaceDown == false)
                 {
-                    timeOut = true;
                     Shoot(game);
                 }
+
+                // Set it to true
+                spaceDown = true;
+            }
+
+            if(Keyboard.GetState().IsKeyUp(Keys.Space) == true)
+            {
+                spaceDown = false;
             }
 
             // Apply gravity
@@ -114,15 +119,6 @@ namespace SideScrollingGame
         {
             // Update our player
             UpdateInput(deltaTime, game);
-
-            if(timeOut == true)
-            {
-                if(counter > maxTime)
-                {
-                    counter = 0;
-                    timeOut = false;
-                }
-            }
 
             // Update Bullets
             foreach (Shell bullet in shellList)
