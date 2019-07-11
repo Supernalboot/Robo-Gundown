@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Media;
 
 namespace SideScrollingGame
 {
@@ -75,6 +76,9 @@ namespace SideScrollingGame
         // Add our timer stuff
         float elapsedTime;
         public double counter;
+
+        // Adds music
+        public Song music;
 
         // Create our game states
         public GameState setState()
@@ -160,6 +164,10 @@ namespace SideScrollingGame
 
             // Load in Game Over Screen
             gameOver = Content.Load<Texture2D>("images/gameOver");
+
+            // Loads in music
+            music = Content.Load<Song>("images/music");
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -200,6 +208,9 @@ namespace SideScrollingGame
                     {
                         enemy.Load(this.Content, this);
                     }
+
+                    // Music
+                    MediaPlayer.Play(music);
 
                     state = GameState.PLAYING;
 
@@ -316,6 +327,7 @@ namespace SideScrollingGame
                     if (player.Lives <= 0)
                     {
                         state = GameState.LOST;
+                        MediaPlayer.Stop();
                     }
 
                     break;
