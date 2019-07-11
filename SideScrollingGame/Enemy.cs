@@ -14,7 +14,7 @@ namespace SideScrollingGame
     public class Enemy
     {
         // Create our enemy Rectangle
-        public Rectangle enemy;
+        public Rectangle enemyRect;
 
         // set our speed and timers
         int speed = 10;
@@ -48,7 +48,7 @@ namespace SideScrollingGame
             // Set our position
             SetStartPos(game);
 
-            enemy = new Rectangle((int)position.X, (int)position.Y, enemySprite.Width - 170, enemySprite.Height - 120);
+            enemyRect = new Rectangle((int)position.X, (int)position.Y, enemySprite.Width - 170, enemySprite.Height - 120);
 
             // Ajust Position so that they do not clip off screen
             PosAjust(game);
@@ -59,12 +59,12 @@ namespace SideScrollingGame
                 // make sure that we dont check ourselves
                 if (this == game.enemyList[i]) continue;
 
-                if (HasCollided(game.enemyList[i].enemy, game) == true)
+                if (HasCollided(game.enemyList[i].enemyRect, game) == true)
                 {
                     // Reset Pos
                     SetStartPos(game);
-                    enemy.X = (int)position.X;
-                    enemy.Y = (int)position.Y;
+                    enemyRect.X = (int)position.X;
+                    enemyRect.Y = (int)position.Y;
                     PosAjust(game);
 
                     i = 0;
@@ -75,8 +75,8 @@ namespace SideScrollingGame
         void PosAjust(Game1 game)
         {
             // Ajust Position so that they do not clip off screen
-            if (enemy.X + enemy.Width > game.screenWidth) enemy.X = game.screenWidth - enemy.Width;
-            if (enemy.X < 0) enemy.X = 0;
+            if (enemyRect.X + enemyRect.Width > game.screenWidth) enemyRect.X = game.screenWidth - enemyRect.Width;
+            if (enemyRect.X < 0) enemyRect.X = 0;
         }
 
         // Draw our Sprite
@@ -84,7 +84,7 @@ namespace SideScrollingGame
         {
             // Draw our sprite
             a_spriteBatch.Begin();
-            a_spriteBatch.Draw(enemySprite, enemy, Color.White);
+            a_spriteBatch.Draw(enemySprite, enemyRect, Color.White);
             a_spriteBatch.End();
         }
 
@@ -107,7 +107,7 @@ namespace SideScrollingGame
         // Collision Detection
         public bool HasCollided(Rectangle a_intersect, Game1 game)
         {
-            if (enemy.Intersects(a_intersect)) // rectange.intersects
+            if (enemyRect.Intersects(a_intersect)) // rectange.intersects
             {
                 return true;
             }
@@ -120,7 +120,7 @@ namespace SideScrollingGame
         // Check if enemy goes off screen
         public bool OffScreen(Game1 game)
         {
-            if (enemy.Y > game.screenHight)
+            if (enemyRect.Y > game.screenHight + enemyRect.Height)
             {
                 return true;
             }
@@ -134,7 +134,7 @@ namespace SideScrollingGame
         void UpdateVelocity()
         {
             // Move our enemy
-            enemy.Y += speed;
+            enemyRect.Y += speed;
         }
     }
 }

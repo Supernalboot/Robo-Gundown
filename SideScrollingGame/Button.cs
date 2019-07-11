@@ -53,6 +53,7 @@ namespace SideScrollingGame
             // Get our mouseState every update
             MouseState mouseState = Mouse.GetState();
 
+            // Check if the mose exists inside the button
             if (mouseState.X < button.X + buttonSprite.Width &&
                     mouseState.X > button.X &&
                     mouseState.Y < button.Y + buttonSprite.Height &&

@@ -32,7 +32,7 @@ namespace SideScrollingGame
         Texture2D playerSprite;
 
         // Create our rectange for our player
-        public Rectangle player;
+        public Rectangle playerRect;
 
         // Create our shell list
         public List<Shell> shellList = new List<Shell>();
@@ -50,25 +50,25 @@ namespace SideScrollingGame
             //Get Our Games Gravity
             Vector2 localAcceleration = game.gravity;
 
-
+            // Check for key inputs
             if (Keyboard.GetState().IsKeyDown(Keys.Left) == true || Keyboard.GetState().IsKeyDown(Keys.A) == true)
             {
-                player.X -= moveSpeed;
+                playerRect.X -= moveSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) == true || Keyboard.GetState().IsKeyDown(Keys.D) == true)
             {
-                player.X += moveSpeed;
+                playerRect.X += moveSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up) == true || Keyboard.GetState().IsKeyDown(Keys.W) == true)
             {
-                player.Y -= moveSpeed + (int)game.gravity.Y;
+                playerRect.Y -= moveSpeed + (int)game.gravity.Y;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Down) == true || Keyboard.GetState().IsKeyDown(Keys.S) == true)
             {
-                player.Y += moveSpeed;
+                playerRect.Y += moveSpeed;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
@@ -89,29 +89,29 @@ namespace SideScrollingGame
             }
 
             // Apply gravity
-            player.Y += (int)game.gravity.Y;
+            playerRect.Y += (int)game.gravity.Y;
         }
 
         void Collision(Game1 game)
         {
-            if(player.X + player.Width > game.screenWidth)
+            if(playerRect.X + playerRect.Width > game.screenWidth)
             {
-                player.X = game.screenWidth - player.Width;
+                playerRect.X = game.screenWidth - playerRect.Width;
             }
 
-            if (player.X < 0)
+            if (playerRect.X < 0)
             {
-                player.X = 0;
+                playerRect.X = 0;
             }
 
-            if (player.Y + player.Height > game.screenHight + (player.Height * 2))
+            if (playerRect.Y + playerRect.Height > game.screenHight + (playerRect.Height * 2))
             {
                 // game.state = GameState.LOST;
             }
 
-            if (player.Y < 0)
+            if (playerRect.Y < 0)
             {
-                player.Y = 0;
+                playerRect.Y = 0;
             }
         }
 
@@ -143,7 +143,7 @@ namespace SideScrollingGame
             playerSprite = content.Load<Texture2D>("images/player");
 
             // Load our player Rectangle
-            player = new Rectangle(X, Y, playerSprite.Width - 150, playerSprite.Height - 70);
+            playerRect = new Rectangle(X, Y, playerSprite.Width - 150, playerSprite.Height - 70);
         }
 
         // Draw our class
@@ -152,13 +152,13 @@ namespace SideScrollingGame
 
             // Draw our class
             a_spriteBatch.Begin();
-            a_spriteBatch.Draw(playerSprite, player, Color.White);
+            a_spriteBatch.Draw(playerSprite, playerRect, Color.White);
             a_spriteBatch.End();
         }
 
         bool OffScreen(Game1 game)
         {
-            if (player.Y > game.screenHight * 2)
+            if (playerRect.Y > game.screenHight + playerRect.Height)
             {
                 return true;
             }

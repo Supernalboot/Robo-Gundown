@@ -19,7 +19,7 @@ namespace SideScrollingGame
         }
 
         // Create our Shell Rectangle
-        Rectangle shell;
+        Rectangle shellRect;
 
         // set our speed and timers
         int speed = 10;
@@ -33,8 +33,8 @@ namespace SideScrollingGame
         // Set our Start Positon
         void SetStartPos(Player player)
         {
-            position.X = player.player.X + player.player.Width - (shellSprite.Width / 2);// - shell.Width / 2;
-            position.Y = player.player.Y - shell.Height;
+            position.X = player.playerRect.X + player.playerRect.Width - (shellSprite.Width / 2);// - shell.Width / 2;
+            position.Y = player.playerRect.Y - shellRect.Height;
         }
 
         // Load our Sprite and Shell
@@ -47,25 +47,25 @@ namespace SideScrollingGame
             SetStartPos(player);
 
             // Create our new shell rectangle
-            shell = new Rectangle((int)position.X, (int)position.Y, shellSprite.Width - 20, shellSprite.Height - 20);
+            shellRect = new Rectangle((int)position.X, (int)position.Y, shellSprite.Width - 20, shellSprite.Height - 20);
         }
 
         // Draw our Sprite and Shell
         public void Draw(SpriteBatch a_spriteBatch)
         {
             a_spriteBatch.Begin();
-            a_spriteBatch.Draw(shellSprite, shell, Color.White);
+            a_spriteBatch.Draw(shellSprite, shellRect, Color.White);
             a_spriteBatch.End();
         }
 
         public void Update()
         {
-            shell.Y -= speed;
+            shellRect.Y -= speed;
         }
 
         public bool OffScreen(Game1 game)
         {
-            if (shell.Y + shell.Height < 0)
+            if (shellRect.Y + shellRect.Height < 0)
             {
                 return true;
             }
@@ -78,7 +78,7 @@ namespace SideScrollingGame
         // Collision Detection
         public bool HasCollided(Rectangle a_intersect)
         {
-            if (shell.Intersects(a_intersect)) // rectange.intersects
+            if (shellRect.Intersects(a_intersect)) // rectange.intersects
             {
                 return true;
             }
