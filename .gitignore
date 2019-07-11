@@ -328,3 +328,11 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+.vs/SideScrollingGame/v15/.suo
+.vs/SideScrollingGame/v15/Server/sqlite3/storage.ide-shm
+SideScrollingGame/Content/bin/Windows/Arial.xnb
+SideScrollingGame/Content/bin/Windows/images/playerBullet.xnb
+SideScrollingGame/Content/Content.mgcb
+SideScrollingGame/Content/obj/Windows/.mgcontent
+SideScrollingGame/Content/obj/Windows/Content/.mgcontent
+SideScrollingGame/Content/obj/Windows/Content/.mgstats
