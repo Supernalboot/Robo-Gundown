@@ -140,7 +140,7 @@ namespace SideScrollingGame
             startButton.Load(this.Content, screenWidth / 3, screenHight / 3, "start", 0);
 
             // TODO: use this.Content to load your game content here
-            player.Load(this.Content, screenWidth / 2 - player.player.Width, screenHight / 2 - player.player.Height);
+            player.Load(this.Content, screenWidth / 2 - player.playerRect.Width, screenHight / 2 - player.playerRect.Height);
 
             // Load level
             level = Content.Load<Texture2D>("images/level");
@@ -188,7 +188,7 @@ namespace SideScrollingGame
                     exitButton.Update(gameTime, this);
                     startButton.Update(gameTime, this);
 
-                    player.Load(this.Content, screenWidth / 2 - player.player.Width, screenHight / 2 - player.player.Height);
+                    player.Load(this.Content, screenWidth / 2 - player.playerRect.Width, screenHight / 2 - player.playerRect.Height);
 
                     break;
 
@@ -263,7 +263,7 @@ namespace SideScrollingGame
                         }
 
                         // Check if enemy has collieded with player
-                        if (enemyList[i].HasCollided(player.player, this) == true)
+                        if (enemyList[i].HasCollided(player.playerRect, this) == true)
                         {
                             player.Lives--;
                             enemyList.Remove(enemyList[i]);
@@ -293,8 +293,12 @@ namespace SideScrollingGame
                                 // Break out the loop if the bullet doesnt exist
                                 if (player.shellList.Count == 0) break;
 
-                                if (player.shellList[i].HasCollided(enemyList[index].enemy) == true)
+                                if (player.shellList[i].HasCollided(enemyList[index].enemyRect) == true)
                                 {
+                                    // Increase the score by 1
+                                    score++;
+
+                                    // Remove our shell and enemy
                                     enemyList.Remove(enemyList[index]);
                                     player.shellList.Remove(player.shellList[i]);
 
@@ -392,8 +396,15 @@ namespace SideScrollingGame
 
                 case GameState.LOST:
                     spriteBatch.Begin();
+                    // Draw our game over
                     spriteBatch.Draw(gameOver, new Rectangle((screenWidth / 2) - (gameOver.Width / 2), (screenHight / 2) - (gameOver.Height / 2), gameOver.Width, gameOver.Height), Color.White);
                     spriteBatch.DrawString(arialFont, "Press Esc to return to menu", new Vector2(0, 0), Color.Red, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+
+                    // Get our score as a string, meausre it, then draw
+                    scoreString = "Score : " + score;
+                    scoreSize = arialFont.MeasureString(scoreString);
+                    spriteBatch.DrawString(arialFont, scoreString, new Vector2(screenWidth - scoreSize.X * 3 - 20, 0 + scoreSize.Y), Color.Red, 0, new Vector2(0, 0), 3, SpriteEffects.None, 0);
+
                     spriteBatch.End();
                     break;
             }
