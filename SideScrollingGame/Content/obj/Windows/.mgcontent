@@ -4,14 +4,27 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/Arial.spritefont</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/background.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/enemy.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/enemyBullet.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/exit.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/level.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/player.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/playerBullet.png</File>
-    <File>D:/Github/Robo-Gundown/SideScrollingGame/Content/images/start.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/Arial.spritefont</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/background.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/enemy.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/enemyBullet.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/exit.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/gameOver.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/level.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/player.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/playerBullet.png</File>
+    <File>E:/AIE/Programming Foundations/Robo-Gundown/SideScrollingGame/Content/images/start.png</File>
   </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
 </SourceFileCollection>
