@@ -48,7 +48,7 @@ namespace SideScrollingGame
             // Set our position
             SetStartPos(game);
 
-            enemyRect = new Rectangle((int)position.X, (int)position.Y, enemySprite.Width - 170, enemySprite.Height - 120);
+            enemyRect = new Rectangle((int)position.X, (int)position.Y, enemySprite.Width - 230, enemySprite.Height - 150);
 
             // Ajust Position so that they do not clip off screen
             PosAjust(game);

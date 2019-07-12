@@ -144,7 +144,7 @@ namespace SideScrollingGame
             playerSprite = content.Load<Texture2D>("images/player");
 
             // Load our player Rectangle
-            playerRect = new Rectangle(X, Y, playerSprite.Width - 150, playerSprite.Height - 70);
+            playerRect = new Rectangle(X, Y, playerSprite.Width - 190, playerSprite.Height - 90);
         }
 
         // Draw our class

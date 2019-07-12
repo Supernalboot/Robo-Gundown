@@ -47,7 +47,7 @@ namespace SideScrollingGame
             SetStartPos(player);
 
             // Create our new shell rectangle
-            shellRect = new Rectangle((int)position.X, (int)position.Y, shellSprite.Width - 20, shellSprite.Height - 20);
+            shellRect = new Rectangle((int)position.X, (int)position.Y, shellSprite.Width - 40, shellSprite.Height - 40);
         }
 
         // Draw our Sprite and Shell
