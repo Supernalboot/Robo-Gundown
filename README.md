@@ -9,8 +9,8 @@ Robo-Gundown Is a game created using Mono Game and C#.
 | KEY                      | ACTION |
 | ------------------------ | ------ |
 | **W** or **Up Arrow**    | Up     |
-| **A** or **Left Arrow**  | Left   |
 | **S** or **Down Arrow**  | Down   |
+| **A** or **Left Arrow**  | Left   |
 | **D** or **Right Arrow** | Right  |
 | **Space Bar**            | Shoot  |
 | **Left Click**           | Select |
