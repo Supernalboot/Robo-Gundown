@@ -212,6 +212,8 @@ namespace SideScrollingGame
                     // Music
                     MediaPlayer.Play(music);
 
+                    maxEnemy = 5;
+
                     state = GameState.PLAYING;
 
                     break;
@@ -270,7 +272,8 @@ namespace SideScrollingGame
                         if (enemyList[i].OffScreen(this) == true)
                         {
                             enemyList.Remove(enemyList[i]);
-                            i = 0;
+
+                            //i--;
                         }
 
                         // Check if enemy has collieded with player
@@ -279,7 +282,7 @@ namespace SideScrollingGame
                             player.Lives--;
                             enemyList.Remove(enemyList[i]);
 
-                            i = 0;
+                            //i--;
                         }
                     }
 
@@ -308,6 +311,12 @@ namespace SideScrollingGame
                                 {
                                     // Increase the score by 1
                                     score++;
+
+                                    // Check if score is at every 50 points
+                                    if (score % 50 == 0 && score != 0)
+                                    {
+                                        maxEnemy *= 2;
+                                    }
 
                                     // Remove our shell and enemy
                                     enemyList.Remove(enemyList[index]);
